@@ -28,4 +28,10 @@ public class ChannelReader extends SimpleChannelInboundHandler<Object> {
 
         nettyServer.getMessageReceivedListeners().forEach(listener -> listener.onMessageReceived(message));
     }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        if(!cause.getMessage().equals("Connection reset"))
+            super.exceptionCaught(ctx, cause);
+    }
 }
