@@ -10,6 +10,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+import java.util.ArrayList;
+
 @ChannelHandler.Sharable
 public class NettyClient {
 
@@ -17,6 +19,8 @@ public class NettyClient {
     private NioSocketChannel nioSocketChannel;
     private ChannelFuture channelFuture;
     private NioEventLoopGroup nioEventLoopGroup;
+
+    private ArrayList<MessageReceived> messageReceivedListeners;
 
     public NettyClient() {}
 
@@ -79,6 +83,7 @@ public class NettyClient {
         nioSocketChannel = new NioSocketChannel();
         channelFuture = null;
         nioEventLoopGroup = new NioEventLoopGroup(1);
+        messageReceivedListeners = new ArrayList<>();
     }
 
     public Bootstrap getBootstrap() {
@@ -95,5 +100,13 @@ public class NettyClient {
 
     public ChannelFuture getChannelFuture() {
         return channelFuture;
+    }
+
+    public void addMessageReceivedListener(MessageReceived messageReceivedListener) {
+        messageReceivedListeners.add(messageReceivedListener);
+    }
+
+    public ArrayList<MessageReceived> getMessageReceivedListeners() {
+        return messageReceivedListeners;
     }
 }

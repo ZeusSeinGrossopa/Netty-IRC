@@ -25,5 +25,7 @@ public class ChannelReader extends SimpleChannelInboundHandler<Object> {
     protected void channelRead0(ChannelHandlerContext channel, Object object) throws Exception {
         String message = ((ByteBuf) object).toString(Charset.defaultCharset());
         System.out.println("Received Message: " + message);
+
+        nettyClient.getMessageReceivedListeners().forEach(listener -> listener.onMessageReceived(message));
     }
 }

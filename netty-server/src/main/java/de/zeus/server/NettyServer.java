@@ -17,6 +17,7 @@ public class NettyServer {
     private ChannelFuture channelFuture;
 
     private ArrayList<Channel> registeredChannels;
+    private ArrayList<MessageReceived> messageReceivedListeners;
 
     public NettyServer() {}
 
@@ -70,6 +71,7 @@ public class NettyServer {
     public void reset() {
         nioEventLoopGroup = new NioEventLoopGroup(1);
         registeredChannels = new ArrayList<>();
+        messageReceivedListeners = new ArrayList<>();
         bootstrap = null;
     }
 
@@ -96,5 +98,13 @@ public class NettyServer {
 
     public ChannelFuture getChannelFuture() {
         return channelFuture;
+    }
+
+    public void addMessageReceivedListener(MessageReceived messageReceivedListener) {
+        messageReceivedListeners.add(messageReceivedListener);
+    }
+
+    public ArrayList<MessageReceived> getMessageReceivedListeners() {
+        return messageReceivedListeners;
     }
 }
