@@ -32,10 +32,10 @@ public class ExampleServer {
 
         while (true) {
             String message = scanner.nextLine();
-            if(message == null || message.isEmpty())
+            if (message == null || message.isEmpty())
                 continue;
 
-            if(message.toLowerCase().startsWith("stop")) {
+            if (message.toLowerCase().startsWith("stop")) {
                 server.stop();
                 break;
             }

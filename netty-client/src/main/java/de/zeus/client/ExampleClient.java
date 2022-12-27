@@ -34,10 +34,10 @@ public class ExampleClient {
         while (true) {
             String message = scanner.nextLine();
 
-            if(message == null || message.isEmpty())
+            if (message == null || message.isEmpty())
                 continue;
 
-            if(message.toLowerCase().startsWith("stop")) {
+            if (message.toLowerCase().startsWith("stop")) {
                 nettyClient.disconnect();
                 break;
             }

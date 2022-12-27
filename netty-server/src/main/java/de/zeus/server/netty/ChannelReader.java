@@ -38,7 +38,7 @@ public class ChannelReader extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        if(!cause.getMessage().equals("Connection reset"))
+        if (!cause.getMessage().equals("Connection reset"))
             super.exceptionCaught(ctx, cause);
     }
 }

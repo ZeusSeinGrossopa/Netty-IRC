@@ -27,12 +27,13 @@ public class NettyClient {
 
     private ArrayList<MessageReceived> messageReceivedListeners;
 
-    public NettyClient() {}
+    public NettyClient() {
+    }
 
     /**
      * Starts the client
      *
-     * @param ip the host to connect to
+     * @param ip   the host to connect to
      * @param port the port to connect to
      */
     public final void connect(String ip, int port) {
@@ -49,16 +50,17 @@ public class NettyClient {
             bootstrap.option(ChannelOption.TCP_NODELAY, true)
                     .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
                     .option(ChannelOption.SO_KEEPALIVE, true);
-        } catch(ChannelException ignored) {}
+        } catch (ChannelException ignored) {
+        }
 
         try {
             channelFuture = bootstrap.connect(ip, port).syncUninterruptibly();
 
-            if(channelFuture.isSuccess())
+            if (channelFuture.isSuccess())
                 System.out.println("Connected successfully");
             else
                 throw new RuntimeException("Unable to connect");
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println("Could not connect to " + ip + ":" + port);
 
             throw new RuntimeException("Unable to connect to server", e);
@@ -69,13 +71,13 @@ public class NettyClient {
      * Disconnects the client from the server
      */
     public final void disconnect() {
-        if(nioSocketChannel != null && nioSocketChannel.isOpen())
+        if (nioSocketChannel != null && nioSocketChannel.isOpen())
             nioSocketChannel.close();
 
-        if(channelFuture != null)
+        if (channelFuture != null)
             channelFuture.channel().close();
 
-        if(nioEventLoopGroup != null)
+        if (nioEventLoopGroup != null)
             nioEventLoopGroup.shutdownGracefully();
 
         reset();
@@ -87,9 +89,9 @@ public class NettyClient {
      * @param message the message to send
      */
     public void sendMessage(String message) {
-        if(nioSocketChannel != null && nioSocketChannel.isOpen()) {
+        if (nioSocketChannel != null && nioSocketChannel.isOpen()) {
             nioSocketChannel.writeAndFlush(Unpooled.wrappedBuffer(message.getBytes())).addListener(future -> {
-                if(future.isSuccess())
+                if (future.isSuccess())
                     System.out.println("Sent message: " + message);
                 else
                     System.err.println("Could not send message: " + message);

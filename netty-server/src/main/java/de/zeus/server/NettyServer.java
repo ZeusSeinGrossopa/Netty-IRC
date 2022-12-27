@@ -24,12 +24,13 @@ public class NettyServer {
     private ArrayList<Channel> registeredChannels;
     private ArrayList<MessageReceived> messageReceivedListeners;
 
-    public NettyServer() {}
+    public NettyServer() {
+    }
 
     /**
      * Starts the server
      *
-     * @param ip the host to bind to
+     * @param ip   the host to bind to
      * @param port the port to bind to
      */
     public final void start(String ip, int port) throws RuntimeException {
@@ -47,16 +48,17 @@ public class NettyServer {
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .option(ChannelOption.AUTO_CLOSE, true)
                     .option(ChannelOption.SO_REUSEADDR, true);
-        } catch(ChannelException ignored) {}
+        } catch (ChannelException ignored) {
+        }
 
         try {
             channelFuture = bootstrap.localAddress(ip, port).bind().syncUninterruptibly();
 
-            if(channelFuture.isSuccess())
+            if (channelFuture.isSuccess())
                 System.out.println("Server started successfully");
             else
                 throw new RuntimeException("Unable to start server");
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println("Could not start server on " + ip + ":" + port);
 
             throw new RuntimeException("Unable to start server", e);
@@ -68,15 +70,15 @@ public class NettyServer {
      */
     public final void stop() {
         for (Channel channel : getRegisteredChannels()) {
-            if(channel != null && channel.isOpen()) {
+            if (channel != null && channel.isOpen()) {
                 channel.close();
             }
         }
 
-        if(nioEventLoopGroup != null)
+        if (nioEventLoopGroup != null)
             nioEventLoopGroup.shutdownGracefully();
 
-        if(channelFuture != null)
+        if (channelFuture != null)
             channelFuture.channel().close();
 
         reset();
@@ -101,7 +103,7 @@ public class NettyServer {
      */
     public void sendMessage(String message) {
         for (Channel channel : getRegisteredChannels()) {
-            if(channel != null && channel.isOpen()) {
+            if (channel != null && channel.isOpen()) {
                 channel.writeAndFlush(Unpooled.wrappedBuffer(message.getBytes()));
             }
         }
@@ -115,7 +117,7 @@ public class NettyServer {
      * @param channel the channel to send the message to
      */
     public void sendMessageFor(String message, Channel channel) {
-        if(channel != null && channel.isOpen()) {
+        if (channel != null && channel.isOpen()) {
             channel.writeAndFlush(Unpooled.wrappedBuffer(message.getBytes()));
         }
     }
