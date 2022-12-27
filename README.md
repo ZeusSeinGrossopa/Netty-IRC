@@ -21,4 +21,28 @@ The server is a command line application that allows the user to send messages t
 The server can also receive messages from the client. 
 Type the stop command for stopping the server.
 
+--- 
+
+## API 
+
+### Server
+```
+    NettyServer server = new NettyServer();
+
+    server.start("127.0.0.1", 8080);
+    server.addMessageReceivedListener(new MessageReceived() {
+        @Override
+        public void onMessageReceived(String message) {
+            server.sendMessage("Hello Client!");
+        }
+    });
+```
+
+### Client
+
+```
+    NettyClient nettyClient = new NettyClient();
+    nettyClient.connect("127.0.0.1", 8080);
+```
+
 ---
