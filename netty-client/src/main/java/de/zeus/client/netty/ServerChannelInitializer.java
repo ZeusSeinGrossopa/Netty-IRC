@@ -3,6 +3,11 @@ package de.zeus.client.netty;
 import de.zeus.client.NettyClient;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+/**
+ * This class is the channel initializer for the client. It will add the client handler to the pipeline.
+ *
+ * @author ZeusSeinGrossopa
+ */
 public class ServerChannelInitializer extends io.netty.channel.ChannelInitializer<NioSocketChannel> {
 
     private final NettyClient nettyClient;

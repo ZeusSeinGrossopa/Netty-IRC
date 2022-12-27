@@ -12,6 +12,11 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the main class of the client. It will start the client and handle the connection to the server.
+ *
+ * @author ZeusSeinGrossopa
+ */
 @ChannelHandler.Sharable
 public class NettyClient {
 
@@ -24,7 +29,13 @@ public class NettyClient {
 
     public NettyClient() {}
 
-    public void connect(String ip, int port) {
+    /**
+     * Starts the client
+     *
+     * @param ip the host to connect to
+     * @param port the port to connect to
+     */
+    public final void connect(String ip, int port) {
         reset();
 
         System.out.println("Connecting to " + ip + ":" + port);
@@ -54,7 +65,10 @@ public class NettyClient {
         }
     }
 
-    public void disconnect() {
+    /**
+     * Disconnects the client from the server
+     */
+    public final void disconnect() {
         if(nioSocketChannel != null && nioSocketChannel.isOpen())
             nioSocketChannel.close();
 
@@ -67,6 +81,11 @@ public class NettyClient {
         reset();
     }
 
+    /**
+     * Sends a message to the server
+     *
+     * @param message the message to send
+     */
     public void sendMessage(String message) {
         if(nioSocketChannel != null && nioSocketChannel.isOpen()) {
             nioSocketChannel.writeAndFlush(Unpooled.wrappedBuffer(message.getBytes())).addListener(future -> {
@@ -78,6 +97,11 @@ public class NettyClient {
         }
     }
 
+    /**
+     * Resets the client variables.
+     *
+     * <p>Should be called when the client is disconnected or when the client is started.</p>
+     */
     public void reset() {
         bootstrap = new Bootstrap();
         nioSocketChannel = new NioSocketChannel();

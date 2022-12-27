@@ -9,6 +9,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the main class for the server. It will start the server and handle incoming connections.
+ *
+ * @author ZeusSeinGrossopa
+ */
 @ChannelHandler.Sharable
 public class NettyServer {
 
@@ -21,6 +26,12 @@ public class NettyServer {
 
     public NettyServer() {}
 
+    /**
+     * Starts the server
+     *
+     * @param ip the host to bind to
+     * @param port the port to bind to
+     */
     public final void start(String ip, int port) throws RuntimeException {
         reset();
 
@@ -52,6 +63,9 @@ public class NettyServer {
         }
     }
 
+    /**
+     * Stops the server
+     */
     public final void stop() {
         for (Channel channel : getRegisteredChannels()) {
             if(channel != null && channel.isOpen()) {
@@ -68,6 +82,11 @@ public class NettyServer {
         reset();
     }
 
+    /**
+     * Resets all current variables.
+     * <p>
+     * Attention: Use this method only if the server is stopped!
+     */
     public void reset() {
         nioEventLoopGroup = new NioEventLoopGroup(1);
         registeredChannels = new ArrayList<>();
@@ -75,6 +94,11 @@ public class NettyServer {
         bootstrap = null;
     }
 
+    /**
+     * Sends a message to all connected clients
+     *
+     * @param message the message to send
+     */
     public void sendMessage(String message) {
         for (Channel channel : getRegisteredChannels()) {
             if(channel != null && channel.isOpen()) {

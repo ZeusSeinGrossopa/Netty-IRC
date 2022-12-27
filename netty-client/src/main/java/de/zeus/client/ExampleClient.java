@@ -2,8 +2,18 @@ package de.zeus.client;
 
 import java.util.Scanner;
 
+/**
+ * This class is the entry point for the client if you want to run it from the command line.
+ * It will start the client and wait for the user to type "stop" to stop the client.
+ * Other lines will be sent to the server.
+ *
+ * @author ZeusSeinGrossopa
+ */
 public class ExampleClient {
 
+    /**
+     * The main method
+     */
     public static void main(String[] args) {
         NettyClient nettyClient = new NettyClient();
         Scanner scanner = new Scanner(System.in);
@@ -34,5 +44,4 @@ public class ExampleClient {
             nettyClient.sendMessage(message);
         }
     }
-
 }

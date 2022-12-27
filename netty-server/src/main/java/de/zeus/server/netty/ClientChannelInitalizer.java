@@ -4,6 +4,11 @@ import de.zeus.server.NettyServer;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+/**
+ * This class initialize the channel for the client and sets the {@link ChannelReader} as the handler
+ *
+ * @author ZeusSeinGrossopa
+ */
 public class ClientChannelInitalizer extends ChannelInitializer<NioSocketChannel> {
 
     private final NettyServer nettyServer;

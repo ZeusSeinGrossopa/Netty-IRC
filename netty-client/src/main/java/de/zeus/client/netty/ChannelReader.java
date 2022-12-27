@@ -7,6 +7,11 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.nio.charset.Charset;
 
+/**
+ * This class is the handler for the client. It will handle incoming messages and pass them to the client.
+ *
+ * @author ZeusSeinGrossopa
+ */
 public class ChannelReader extends SimpleChannelInboundHandler<Object> {
 
     private final NettyClient nettyClient;

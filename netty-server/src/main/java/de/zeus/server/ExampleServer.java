@@ -2,8 +2,18 @@ package de.zeus.server;
 
 import java.util.Scanner;
 
+/**
+ * This class is the entry point for the server if you want to run it from the command line.
+ * It will start the server and wait for the user to type "stop" to stop the server.
+ * Other lines will be sent to all connected clients.
+ *
+ * @author ZeusSeinGrossopa
+ */
 public class ExampleServer {
 
+    /**
+     * The main method
+     */
     public static void main(String[] args) {
         NettyServer server = new NettyServer();
         Scanner scanner = new Scanner(System.in);
