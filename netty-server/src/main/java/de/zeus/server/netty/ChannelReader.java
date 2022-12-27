@@ -1,5 +1,6 @@
 package de.zeus.server.netty;
 
+import de.zeus.server.ExampleServer;
 import de.zeus.server.NettyServer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,6 +32,7 @@ public class ChannelReader extends SimpleChannelInboundHandler<Object> {
         String message = ((ByteBuf) object).toString(Charset.defaultCharset());
         System.out.println("Received Message: " + message);
 
+        nettyServer.getRegisteredChannels().stream().filter(e -> e != channel.channel()).forEach(e -> ExampleServer.server.sendMessageFor(message, e));
         nettyServer.getMessageReceivedListeners().forEach(listener -> listener.onMessageReceived(message));
     }
 

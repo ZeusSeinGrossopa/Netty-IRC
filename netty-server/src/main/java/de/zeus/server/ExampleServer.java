@@ -11,11 +11,13 @@ import java.util.Scanner;
  */
 public class ExampleServer {
 
+    public static NettyServer server;
+
     /**
      * The main method
      */
     public static void main(String[] args) {
-        NettyServer server = new NettyServer();
+        server = new NettyServer();
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the port to start the server on: ");

@@ -108,6 +108,18 @@ public class NettyServer {
         System.out.println("Sent message: " + message);
     }
 
+    /**
+     * Sends a message to a specific client
+     *
+     * @param message the message to send
+     * @param channel the channel to send the message to
+     */
+    public void sendMessageFor(String message, Channel channel) {
+        if(channel != null && channel.isOpen()) {
+            channel.writeAndFlush(Unpooled.wrappedBuffer(message.getBytes()));
+        }
+    }
+
     public NioEventLoopGroup getNioEventLoopGroup() {
         return nioEventLoopGroup;
     }
