@@ -15,7 +15,7 @@
     <bytecodeTargetLevel>
       <module name="netty-client-and-server.netty-client" target="17" />
       <module name="netty-client-and-server.netty-server" target="17" />
-      <module name="Netty-Server-And-Client" target="17" />
+      <module name="netty-irc" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Netty-Server-And-Client.iml" filepath="$PROJECT_DIR$/Netty-Server-And-Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/netty-irc.iml" filepath="$PROJECT_DIR$/netty-irc.iml" />
     </modules>
   </component>
 </project>
