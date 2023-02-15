@@ -33,6 +33,7 @@ Type the stop command for stopping the server.
     server.addMessageReceivedListener(new MessageReceived() {
         @Override
         public void onMessageReceived(String message) {
+            System.out.println("Message from Client: " + message);
             server.sendMessage("Hello Client!");
         }
     });
@@ -43,6 +44,15 @@ Type the stop command for stopping the server.
 ```
     NettyClient nettyClient = new NettyClient();
     nettyClient.connect("127.0.0.1", 8080);
+    
+    nettyClient.addMessageReceivedListener(new MessageReceived() {
+        @Override
+        public void onMessageReceived(String message) {
+            System.out.println("Message from Server: " + message);
+        }
+    });
+    
+    nettyClient.sendMessage("Hello Server!");
 ```
 
 ---
