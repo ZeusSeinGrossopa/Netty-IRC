@@ -26,7 +26,7 @@ Type the stop command for stopping the server.
 
 ### Server
 
-```
+```java
     NettyServer server = new NettyServer();
 
     server.start("127.0.0.1", 8080);
@@ -41,7 +41,7 @@ Type the stop command for stopping the server.
 
 ### Client
 
-```
+```java
     NettyClient nettyClient = new NettyClient();
     nettyClient.connect("127.0.0.1", 8080);
     
